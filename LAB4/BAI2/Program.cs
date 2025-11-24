@@ -1,4 +1,4 @@
-namespace LAB4
+namespace BAI2
 {
     internal static class Program
     {
@@ -11,7 +11,7 @@ namespace LAB4
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new Bai1());
+            Application.Run(new Bai2());
         }
     }
 }
