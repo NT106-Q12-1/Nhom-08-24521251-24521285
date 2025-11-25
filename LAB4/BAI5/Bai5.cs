@@ -33,34 +33,19 @@ namespace BAI5
                 var response = await client.PostAsync(url, content);
                 var responseString = await response.Content.ReadAsStringAsync();
 
-                JObject responseObject;
-                try
-                {
-                    responseObject = JObject.Parse(responseString);
-                }
-                catch
-                {
-                    rtbResult.AppendText($"Phản hồi không hợp lệ từ server:\n{responseString}");
-                    return;
-                }
+                var responseObject = JObject.Parse(responseString);
 
-                if (responseObject["detail"] != null)
+                if (!response.IsSuccessStatusCode)
                 {
-                    string detail = responseObject["detail"].ToString();
-                    rtbResult.AppendText($"Đăng nhập thất bại: {detail}\n");
+                    var detail = responseObject["detail"].ToString();
+                    rtbResult.AppendText($"Detail: {detail}");
                     return;
                 }
 
                 var tokenType = responseObject["token_type"].ToString();
                 var accessToken = responseObject["access_token"].ToString();
 
-                if (string.IsNullOrEmpty(accessToken))
-                {
-                    rtbResult.AppendText("Đăng nhập thất bại: Không nhận được access_token\n");
-                    return;
-                }    
-
-                rtbResult.AppendText($"{tokenType} {accessToken}\n\n");
+                rtbResult.AppendText($"{tokenType} {accessToken} \n\n");
                 rtbResult.AppendText("Đăng nhập thành công!\n");
 
                 client.DefaultRequestHeaders.Authorization =
