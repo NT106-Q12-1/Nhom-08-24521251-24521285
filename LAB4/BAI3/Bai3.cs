@@ -1,8 +1,6 @@
 ﻿using Microsoft.Web.WebView2.Core;
-using System.Net;
 using HtmlAgilityPack;
 using System.Net;
-
 
 namespace BAI3
 {
@@ -43,7 +41,8 @@ namespace BAI3
             }
 
             SaveFileDialog sfd = new SaveFileDialog();
-            sfd.FileName = System.IO.Path.GetFileName(url);
+            sfd.Filter = "HTML File|*.html";
+            sfd.FileName = "downloaded_page.html";
 
             if (sfd.ShowDialog() == DialogResult.OK)
             {
@@ -51,77 +50,93 @@ namespace BAI3
                 {
                     using (HttpClient client = new HttpClient())
                     {
-                        byte[] data = await client.GetByteArrayAsync(url);
-                        File.WriteAllBytes(sfd.FileName, data);
+                        string html = await client.GetStringAsync(url);
+
+                        File.WriteAllText(sfd.FileName, html);
                     }
 
-                    MessageBox.Show("Tải thành công!\nLưu tại: " + sfd.FileName);
+                    MessageBox.Show("Tải HTML thành công!\nLưu tại: " + sfd.FileName);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Lỗi tải file: " + ex.Message);
+                    MessageBox.Show("Lỗi tải HTML: " + ex.Message);
                 }
             }
         }
 
+
         private async void downresbtn_Click(object sender, EventArgs e)
         {
-            if (webView21.CoreWebView2 == null)
+            string url = textBox1.Text.Trim();
+            if (string.IsNullOrEmpty(url))
             {
-                MessageBox.Show("WebView2 chưa sẵn sàng!");
+                MessageBox.Show("Vui lòng nhập URL trước!");
                 return;
             }
 
-            // Lấy HTML từ WebView2
-            string html = await webView21.CoreWebView2.ExecuteScriptAsync("document.documentElement.outerHTML");
-            html = WebUtility.HtmlDecode(html.Trim('"'));
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
+            fbd.Description = "Chọn thư mục để lưu ảnh";
 
-            // Dùng HtmlAgilityPack phân tích HTML
+            if (fbd.ShowDialog() != DialogResult.OK)
+                return;
+
+            string saveFolder = fbd.SelectedPath;
+            Uri baseUri = new Uri(url);
+
+            string html = "";
+            using (WebClient wc = new WebClient())
+            {
+                try
+                {
+                    html = wc.DownloadString(url);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Không tải được HTML: " + ex.Message);
+                    return;
+                }
+            }
+
             HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
             doc.LoadHtml(html);
 
-            var imgs = doc.DocumentNode.SelectNodes("//img[@src]");
-            if (imgs == null)
+            var imgNodes = doc.DocumentNode.SelectNodes("//img[@src]");
+            if (imgNodes == null || imgNodes.Count == 0)
             {
-                MessageBox.Show("Không tìm thấy hình!");
+                MessageBox.Show("Không tìm thấy hình ảnh nào!");
                 return;
             }
 
-            // Chọn thư mục lưu hình
-            using (FolderBrowserDialog fbd = new FolderBrowserDialog())
+            WebClient webClient = new WebClient();
+            int index = 0;
+
+            foreach (var img in imgNodes)
             {
-                fbd.Description = "Chọn nơi lưu hình";
-                if (fbd.ShowDialog() != DialogResult.OK)
-                    return;
+                string imgUrl = img.GetAttributeValue("src", "");
 
-                string folder = fbd.SelectedPath;
-                Uri baseUri = new Uri(webView21.Source.ToString());
+                if (string.IsNullOrEmpty(imgUrl))
+                    continue;
 
-                using (HttpClient client = new HttpClient())
+                Uri imgUri = new Uri(baseUri, imgUrl);
+
+                string extension = Path.GetExtension(imgUri.LocalPath);
+                if (string.IsNullOrEmpty(extension))
+                    extension = ".jpg";
+
+                string filename = $"image_{index++}{extension}";
+                string savePath = Path.Combine(saveFolder, filename);
+
+                try
                 {
-                    foreach (var img in imgs)
-                    {
-                        try
-                        {
-                            string src = img.GetAttributeValue("src", "");
-
-                            Uri imgUrl = new Uri(baseUri, src);
-                            byte[] data = await client.GetByteArrayAsync(imgUrl);
-
-                            string fileName = Path.GetFileName(imgUrl.LocalPath);
-                            string savePath = Path.Combine(folder, fileName);
-
-                            File.WriteAllBytes(savePath, data);
-                        }
-                        catch
-                        {
-                            // bỏ qua từng ảnh lỗi
-                        }
-                    }
+                    webClient.DownloadFile(imgUri, savePath);
                 }
-
-                MessageBox.Show("Tải ảnh xong!");
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi tải ảnh: " + ex.Message);
+                }
             }
+
+            MessageBox.Show("Tải xong tất cả ảnh!");
         }
     }
 }
