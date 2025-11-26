@@ -51,7 +51,7 @@ namespace BAI5
                 client.DefaultRequestHeaders.Authorization =
                     new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
 
-                var getUserUrl = "https://nt106.uitiot.vn/api/vl/user/me";
+                var getUserUrl = "https://nt106.uitiot.vn/api/v1/user/me";
                 var getUserResponse = await client.GetAsync(getUserUrl);
                 var getUserResponseString = await getUserResponse.Content.ReadAsStringAsync();
             }

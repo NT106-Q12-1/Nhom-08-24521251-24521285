@@ -73,7 +73,7 @@
             tbURL.Font = new Font("Segoe UI", 12F);
             tbURL.Location = new Point(148, 8);
             tbURL.Name = "tbURL";
-            tbURL.Size = new Size(466, 34);
+            tbURL.Size = new Size(615, 34);
             tbURL.TabIndex = 3;
             // 
             // tbUsername
@@ -111,7 +111,7 @@
             rtbResult.TabIndex = 7;
             rtbResult.Text = "";
             // 
-            // Form1
+            // Bai5
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -124,7 +124,7 @@
             Controls.Add(lblPassword);
             Controls.Add(lbtUsername);
             Controls.Add(lblURL);
-            Name = "Form1";
+            Name = "Bai5";
             Text = "Form1";
             ResumeLayout(false);
             PerformLayout();
