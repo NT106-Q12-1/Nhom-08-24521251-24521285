@@ -89,6 +89,7 @@
             ramdom_btn.TabIndex = 2;
             ramdom_btn.Text = "Ăn gì giờ ";
             ramdom_btn.UseVisualStyleBackColor = true;
+            ramdom_btn.Click += ramdom_btn_Click;
             // 
             // addfood_btn
             // 
@@ -99,6 +100,7 @@
             addfood_btn.TabIndex = 3;
             addfood_btn.Text = "Thêm món ăn";
             addfood_btn.UseVisualStyleBackColor = true;
+            addfood_btn.Click += addfood_btn_Click;
             // 
             // status_txt
             // 

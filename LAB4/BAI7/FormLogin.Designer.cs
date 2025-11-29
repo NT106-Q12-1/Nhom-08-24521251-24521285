@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            user_txt = new TextBox();
+            username_txt = new TextBox();
             password_txt = new TextBox();
             label1 = new Label();
             label2 = new Label();
@@ -38,12 +38,12 @@
             login_btn = new Button();
             SuspendLayout();
             // 
-            // user_txt
+            // username_txt
             // 
-            user_txt.Location = new Point(179, 88);
-            user_txt.Name = "user_txt";
-            user_txt.Size = new Size(276, 27);
-            user_txt.TabIndex = 0;
+            username_txt.Location = new Point(179, 88);
+            username_txt.Name = "username_txt";
+            username_txt.Size = new Size(276, 27);
+            username_txt.TabIndex = 0;
             // 
             // password_txt
             // 
@@ -91,6 +91,7 @@
             signup_link.TabIndex = 5;
             signup_link.TabStop = true;
             signup_link.Text = "SignUp";
+            signup_link.LinkClicked += signup_link_LinkClicked;
             // 
             // label4
             // 
@@ -109,6 +110,7 @@
             login_btn.TabIndex = 7;
             login_btn.Text = "Login";
             login_btn.UseVisualStyleBackColor = true;
+            login_btn.Click += login_btn_Click;
             // 
             // FormLogin
             // 
@@ -122,7 +124,7 @@
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(password_txt);
-            Controls.Add(user_txt);
+            Controls.Add(username_txt);
             Name = "FormLogin";
             Text = "Form1";
             ResumeLayout(false);
@@ -131,7 +133,7 @@
 
         #endregion
 
-        private TextBox user_txt;
+        private TextBox username_txt;
         private TextBox password_txt;
         private Label label1;
         private Label label2;

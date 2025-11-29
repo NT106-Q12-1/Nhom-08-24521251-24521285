@@ -12,6 +12,7 @@ namespace BAI7
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             Application.Run(new Bai7());
+            DatabaseFunction.InitializeDatabase();   
         }
     }
 }

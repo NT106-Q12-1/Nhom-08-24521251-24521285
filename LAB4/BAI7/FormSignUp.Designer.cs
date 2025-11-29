@@ -43,13 +43,13 @@
             label3 = new Label();
             groupBox1 = new GroupBox();
             groupBox2 = new GroupBox();
-            label4 = new Label();
-            label5 = new Label();
-            label6 = new Label();
-            label7 = new Label();
-            label8 = new Label();
-            label9 = new Label();
             label10 = new Label();
+            label9 = new Label();
+            label8 = new Label();
+            label7 = new Label();
+            label6 = new Label();
+            label5 = new Label();
+            label4 = new Label();
             clear_btn = new Button();
             submit_btn = new Button();
             groupBox1.SuspendLayout();
@@ -204,55 +204,15 @@
             groupBox2.TabStop = false;
             groupBox2.Text = "User Information";
             // 
-            // label4
+            // label10
             // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 12F);
-            label4.Location = new Point(53, 26);
-            label4.Name = "label4";
-            label4.Size = new Size(59, 28);
-            label4.TabIndex = 10;
-            label4.Text = "Email";
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI", 12F);
-            label5.Location = new Point(53, 58);
-            label5.Name = "label5";
-            label5.Size = new Size(97, 28);
-            label5.TabIndex = 11;
-            label5.Text = "Firstname";
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Font = new Font("Segoe UI", 12F);
-            label6.Location = new Point(53, 91);
-            label6.Name = "label6";
-            label6.Size = new Size(94, 28);
-            label6.TabIndex = 12;
-            label6.Text = "Lastname";
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Font = new Font("Segoe UI", 12F);
-            label7.Location = new Point(53, 125);
-            label7.Name = "label7";
-            label7.Size = new Size(67, 28);
-            label7.TabIndex = 13;
-            label7.Text = "Phone";
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.Font = new Font("Segoe UI", 12F);
-            label8.Location = new Point(53, 158);
-            label8.Name = "label8";
-            label8.Size = new Size(85, 28);
-            label8.TabIndex = 14;
-            label8.Text = "Birthday";
+            label10.AutoSize = true;
+            label10.Font = new Font("Segoe UI", 12F);
+            label10.Location = new Point(55, 235);
+            label10.Name = "label10";
+            label10.Size = new Size(42, 28);
+            label10.TabIndex = 16;
+            label10.Text = "Sex";
             // 
             // label9
             // 
@@ -264,15 +224,55 @@
             label9.TabIndex = 15;
             label9.Text = "Language";
             // 
-            // label10
+            // label8
             // 
-            label10.AutoSize = true;
-            label10.Font = new Font("Segoe UI", 12F);
-            label10.Location = new Point(55, 235);
-            label10.Name = "label10";
-            label10.Size = new Size(42, 28);
-            label10.TabIndex = 16;
-            label10.Text = "Sex";
+            label8.AutoSize = true;
+            label8.Font = new Font("Segoe UI", 12F);
+            label8.Location = new Point(53, 158);
+            label8.Name = "label8";
+            label8.Size = new Size(85, 28);
+            label8.TabIndex = 14;
+            label8.Text = "Birthday";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 12F);
+            label7.Location = new Point(53, 125);
+            label7.Name = "label7";
+            label7.Size = new Size(67, 28);
+            label7.TabIndex = 13;
+            label7.Text = "Phone";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI", 12F);
+            label6.Location = new Point(53, 91);
+            label6.Name = "label6";
+            label6.Size = new Size(94, 28);
+            label6.TabIndex = 12;
+            label6.Text = "Lastname";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 12F);
+            label5.Location = new Point(53, 58);
+            label5.Name = "label5";
+            label5.Size = new Size(97, 28);
+            label5.TabIndex = 11;
+            label5.Text = "Firstname";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 12F);
+            label4.Location = new Point(53, 26);
+            label4.Name = "label4";
+            label4.Size = new Size(59, 28);
+            label4.TabIndex = 10;
+            label4.Text = "Email";
             // 
             // clear_btn
             // 
@@ -282,6 +282,7 @@
             clear_btn.TabIndex = 15;
             clear_btn.Text = "Clear";
             clear_btn.UseVisualStyleBackColor = true;
+            clear_btn.Click += clear_btn_Click;
             // 
             // submit_btn
             // 
@@ -291,6 +292,7 @@
             submit_btn.TabIndex = 16;
             submit_btn.Text = "Submit";
             submit_btn.UseVisualStyleBackColor = true;
+            submit_btn.Click += submit_btn_Click;
             // 
             // FormSignUp
             // 
